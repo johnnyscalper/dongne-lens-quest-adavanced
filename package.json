@@ -1,0 +1,14 @@
+{
+  "name": "dongne-lens-quest-adavanced",
+  "version": "0.5.0",
+  "private": true,
+  "description": "Dongne Lens Quest (Adavanced): a mobile-first apartment explorer with demo profiles, saved homes and 3D journeys",
+  "scripts": {
+    "dev": "python3 build_static.py --serve --host 0.0.0.0",
+    "start": "python3 server.py --host 0.0.0.0",
+    "test": "python3 -m unittest discover -s tests -v",
+    "build": "python3 build_static.py",
+    "check:static": "python3 build_static.py --check",
+    "check:js": "node --check public/app.js && node --check public/mobile.js && node --check public/journey.js && node --check public/labs.js && node --check public/local-analytics.js && node --check public/local-insights.js && node --check public/local-api.js"
+  }
+}
