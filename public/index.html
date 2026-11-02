@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080a0f">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="동네렌즈 퀘스트 (Adavanced). 3D 동네 탐험, 가격 착시 탐정, 주소 블라인드 선택실험으로 거래 숫자와 나의 기준을 살펴보세요.">
+  <title>동네렌즈 퀘스트 (Adavanced) — 다음 집으로 가는, 나만의 궤도</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23080a0f'/%3E%3Ccircle cx='18' cy='18' r='9' stroke='%2399f6d2' stroke-width='3' fill='none'/%3E%3Cpath d='m25 25 7 7M13 20v-5l5-4 5 4v5' fill='none' stroke='%23a798ff' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/journey.css">
+  <link rel="stylesheet" href="/labs.css">
+  <link rel="stylesheet" href="/mobile.css">
+  <script src="/journey.js" defer></script>
+  <script src="/labs.js" defer></script>
+  <script src="/mobile.js" defer></script>
+  <script src="/app.js" defer></script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body id="top" data-auth="welcome" data-screen="home">
+  <a class="skip-link" href="#profile-form">시작 방법으로 바로가기</a>
+  <section id="welcome-screen" class="welcome-screen" aria-labelledby="hero-title">
+    <header class="welcome-header"><a class="brand" href="/" aria-label="동네렌즈 퀘스트 (Adavanced) 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span class="brand-name">동네렌즈<span class="brand-beta">(Adavanced)</span></span></a><span class="edition-label">MOBILE EDITION <span>05</span></span><a class="welcome-jump" href="#profile-form">체험 시작 ↗</a></header>
+    <div class="welcome-layout">
+      <div class="welcome-story">
+        <p class="eyebrow"><span class="status-dot"></span> YOUR NEXT CHAPTER</p>
+        <h1 id="hero-title">집을 찾는 일,<br><span>설레는 일이 되도록.</span></h1>
+        <p class="welcome-description">마음이 가는 동네를 만나고,<br>나에게 맞는 집의 기준을 발견하세요.</p>
+        <div id="welcome-scene-slot" class="welcome-scene-slot"><div id="journey-scene" class="journey-scene" role="group" aria-label="아파트 마을로 떠나는 3D 탐험 장면"></div></div>
+      </div>
+      <div class="welcome-entry">
+        <div class="entry-top"><span class="entry-emblem" aria-hidden="true"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-7 9 7M6 10v10h12V10m-8 10v-7h4v7"></path></svg></span><span class="entry-badge">나만의 동네 탐험</span></div>
+        <p class="section-kicker">WELCOME HOME</p><h2>반가워요.<br>어떤 이름으로 불러드릴까요?</h2>
+        <p class="entry-description">작은 프로필 하나로 시작하는<br>나만의 집 찾기 여정.</p>
+        <form id="profile-form" class="profile-form" tabindex="-1">
+          <label for="profile-name">체험 프로필 이름</label>
+          <input id="profile-name" type="text" placeholder="예: 동네탐험가" maxlength="20" autocomplete="nickname" aria-describedby="profile-note profile-error" required>
+          <p id="profile-error" class="inline-error" role="alert" hidden></p>
+          <button class="button button-primary entry-submit" type="submit"><span>이 이름으로 체험 시작</span><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button>
+        </form>
+        <div class="entry-divider"><span>또는</span></div>
+        <button id="guest-start" class="guest-button" type="button">로그인 없이 둘러보기 <span aria-hidden="true">↗</span></button>
+        <p id="profile-note" class="entry-note">실제 회원 인증이 없는 체험 프로필입니다.<br>비밀번호 없이 시작하며, 프로필은 이 기기에만 보관됩니다.</p>
+        <div class="entry-data-note"><span class="demo-orbit" aria-hidden="true"></span><span id="runtime-label">가상 데이터 체험 · 실제 시세가 아닙니다</span></div>
+      </div>
+    </div>
+    <footer class="welcome-footer"><span>서울 25개 구 · 나의 속도로 탐색하세요.</span><span>DISCOVER A PLACE TO CALL HOME</span></footer>
+  </section>
+
+  <div id="app-shell" class="app-shell" hidden>
+    <header class="app-header">
+      <div class="app-header-inner">
+        <div class="app-header-leading"><button id="screen-back" class="icon-button" type="button" aria-label="이전 화면으로" hidden><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"></path></svg></button><button type="button" class="app-wordmark" data-route="home" aria-label="동네렌즈 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span>동네렌즈<small>(Adavanced)</small></span></button></div>
+        <strong id="app-header-title" class="app-header-title">홈</strong>
+        <button class="icon-button header-search" type="button" data-open-search aria-label="지역 검색"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></button>
+      </div>
+    </header>
+    <div class="app-context-bar"><div id="source-status" class="source-notice" role="status">가상 데이터 체험 · 실제 시세가 아닙니다</div><div id="warnings" class="warnings" role="status" aria-live="polite"></div></div>
+    <main class="app-main">
+      <section id="screen-home" class="app-page home-page" data-screen="home" aria-labelledby="home-title">
+        <div class="home-topline"><p id="home-greeting">반가워요, 동네탐험가님.</p><span class="home-season"><span class="status-dot"></span> 서울의 25가지 시작</span></div>
+        <div class="home-hero">
+          <div class="home-hero-copy"><p class="eyebrow">A PLACE TO CALL HOME</p><h1 id="home-title" data-screen-title tabindex="-1">다음 집은,<br><span>어떤 동네일까요?</span></h1><p class="home-description">좋아하는 동네에서 시작해 보세요.<br>숫자와 나의 취향을 함께 살펴볼게요.</p><button type="button" class="home-search-cta" data-open-search><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg><span>동네 이름으로 시작하기</span><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button><div class="quick-regions" aria-label="빠른 지역 선택"><button type="button" data-region-query="성동구">성동구 ↗</button><button type="button" data-region-query="강남구">강남구 ↗</button><button type="button" data-region-query="마포구">마포구 ↗</button></div></div>
+          <div id="home-scene-slot" class="home-scene-slot"></div>
+        </div>
+        <div class="home-content-grid">
+          <section class="home-market-peek" aria-labelledby="home-peek-title"><div class="compact-heading"><div><p class="section-kicker">YOUR NEIGHBORHOOD</p><h2 id="home-peek-title"><span id="home-region">관심 동네</span><span class="tiny-label">거래 중앙값</span></h2></div><button type="button" class="text-button" data-route="market">살펴보기 ↗</button></div><div class="peek-prices"><div><span>매매</span><strong id="home-sale">—</strong></div><div><span>전세</span><strong id="home-jeonse">—</strong></div></div><div class="peek-foot"><span id="home-count">거래를 준비하고 있어요</span><span>조건에 따른 집계</span></div></section>
+          <button type="button" class="finance-invitation" data-route="plan"><span class="finance-orbit" aria-hidden="true">₩</span><span class="section-kicker">MAKE YOUR NEXT MOVE</span><strong>내 예산으로<br>가능한 집이 궁금하다면</strong><span class="finance-invitation-foot">자금 계획 세워보기 <svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></span></button>
+        </div>
+        <section class="home-featured-section" aria-labelledby="home-featured-title"><div class="compact-heading"><div><p class="section-kicker">A CLOSER LOOK</p><h2 id="home-featured-title">한 걸음 더 가까이</h2></div><button type="button" class="text-button" data-route="market">전체 보기 ↗</button></div><p class="section-description">선택한 동네의 거래를 단지별로 살펴보세요.</p><div id="home-featured" class="home-featured"><p class="empty-state">지역을 선택하면 단지별 집계가 표시됩니다.</p></div></section>
+        <button type="button" class="discovery-invitation" data-route="labs"><span class="discovery-invitation-icon" aria-hidden="true">✦</span><span><small>TWO WAYS TO DISCOVER</small><strong>가격보다 먼저, 나의 기준을 발견해요.</strong><span>가격 착시 탐정 · 주소 블라인드 선택실험</span></span><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button>
+      </section>
+
+      <section id="screen-market" class="app-page market-page" data-screen="market" hidden inert>
+    <section id="market" class="market-section" aria-labelledby="region-title">
+      <button class="market-search-button" type="button" data-open-search><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg><span id="market-search-label">다른 동네 찾아보기</span><span class="search-key">변경</span></button>
+      <div class="section-heading market-heading">
+        <div><div class="section-kicker">NEIGHBORHOOD REPORT <span id="mode-badge" class="badge badge-demo">가상 예시</span></div><h2 id="region-title" data-screen-title tabindex="-1">동네의 숫자를 살펴보세요</h2><p id="region-subtitle" class="muted">조건을 선택하면 거래 중앙값과 자금 분석을 함께 보여드려요.</p></div>
+        <div class="filter-bar">
+          <label for="period-select"><span>조회 기간</span><select id="period-select"><option value="3">3개월</option><option value="6" selected>6개월</option><option value="12">12개월</option></select></label>
+          <label for="area-select"><span>전용면적</span><select id="area-select"><option value="all" selected>전체 면적</option><option value="small">60㎡ 이하</option><option value="medium">60~85㎡</option><option value="large">85㎡ 초과</option></select></label>
+          <label for="neighborhood-select"><span>동 선택</span><select id="neighborhood-select"><option value="">전체 동</option></select></label>
+        </div>
+      </div>
+
+      <div id="loading-indicator" class="loading-indicator" role="status" hidden><span class="spinner" aria-hidden="true"></span> 거래 자료를 살펴보고 있어요…</div>
+
+      <div class="metric-grid">
+        <article class="metric-card"><div class="metric-label"><span>매매 중앙값</span><span class="metric-symbol symbol-sale" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 11 9-7 9 7M6 10v10h12V10m-8 10v-7h4v7"></path></svg></span></div><p id="sale-value" class="metric-value">—</p><div class="metric-bottom"><span id="sale-count">거래 자료 대기 중</span><span class="metric-dot sale-dot"></span></div></article>
+        <article class="metric-card"><div class="metric-label"><span>전세 중앙값</span><span class="metric-symbol symbol-jeonse" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 8h6m-6 4h6m-6 4h3"></path></svg></span></div><p id="jeonse-value" class="metric-value">—</p><div class="metric-bottom"><span id="jeonse-count">거래 자료 대기 중</span><span class="metric-dot jeonse-dot"></span></div></article>
+        <article class="metric-card"><div class="metric-label"><span>월세 중앙값</span><span class="metric-symbol symbol-rent" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="3"></rect><path d="M7 3v4m10-4v4M3 10h18m-13 4h2m4 0h2"></path></svg></span></div><p id="rent-value" class="metric-value">—</p><div class="metric-bottom"><span id="rent-count">보증금과 함께 확인하세요</span><span class="metric-dot rent-dot"></span></div></article>
+        <article class="metric-card metric-card-tinted"><div class="metric-label"><span>매매 · 전세 차이</span><span class="metric-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h16m-4-4 4 4-4 4M20 16H4m4-4-4 4 4 4"></path></svg></span></div><p id="gap-value" class="metric-value">—</p><div class="metric-bottom"><span id="gap-detail">같은 주택의 차액은 아닙니다</span></div></article>
+      </div>
+
+    <section class="apartment-section" aria-labelledby="apartment-heading">
+      <div class="section-heading"><div><span class="section-kicker">FIND YOUR PLACE</span><h2 id="apartment-heading">지금 살펴볼 단지</h2><p class="muted">가격을 먼저 보고, 마음에 드는 단지를 열어보세요.</p></div></div>
+      <div class="apartment-list-heading"><p id="market-result-count" class="muted">선택 지역의 거래 집계</p><span class="tiny-label">현재 매물 아님</span></div><div id="transaction-tabs" class="transaction-tabs" role="group" aria-label="단지 카드의 거래 유형"><button type="button" data-transaction="sale" aria-pressed="true">매매</button><button type="button" data-transaction="jeonse" aria-pressed="false">전세</button><button type="button" data-transaction="monthly" aria-pressed="false">월세</button></div><div id="apartment-list" class="apartment-list"></div>
+      <p id="apartment-empty" class="empty-state apartment-empty">조건에 맞는 단지별 거래가 이곳에 표시됩니다.</p>
+    </section>
+      <div class="insight-grid">
+        <article class="panel trend-panel">
+          <div class="panel-heading"><div><span class="section-kicker">THE BIGGER PICTURE</span><h3>거래가격의 흐름</h3></div><span class="subtle-badge">월별 중앙값</span></div>
+          <div class="chart-legend"><span><i class="legend-dot sale-dot"></i>매매</span><span><i class="legend-dot jeonse-dot"></i>전세</span></div>
+          <div id="trend-chart" class="trend-chart" role="group" aria-label="선택 지역의 월별 매매와 전세 중앙값"></div>
+          <p id="trend-empty" class="empty-state">지역을 선택하면 가격 흐름을 보여드려요.</p>
+          <div class="chart-caption"><span class="caption-mark" aria-hidden="true">↳</span> 거래된 집의 구성이 매달 달라집니다. 같은 집의 가격 변동률을 뜻하지 않아요.</div>
+        </article>
+
+        <article class="fit-panel" aria-labelledby="fit-heading">
+          <div class="fit-top"><span class="section-kicker">YOUR FINANCIAL FIT</span><span class="fit-orbit" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"></circle><circle cx="16" cy="16" r="5"></circle><path d="M16 1v7m0 16v7M1 16h7m16 0h7"></path></svg></span></div>
+          <h3 id="fit-heading">내 조건에 얼마나 맞을까?</h3>
+          <div class="fit-score-row"><strong id="fit-score">—</strong><span>/ 100</span></div>
+          <p id="fit-label" class="fit-label">자금 조건을 입력해 살펴보세요</p>
+          <span id="fit-confidence" class="fit-confidence">거래 표본 확인 대기</span>
+          <div id="fit-components" class="fit-components"></div>
+          <div id="fit-reasons" class="fit-reasons"></div>
+          <p class="fit-disclaimer">예산과 대출 비중으로 살펴보는 참고 지표입니다.<br>가격 전망·대출 승인·투자 추천을 의미하지 않습니다.</p>
+        </article>
+      </div>
+    </section>
+      </section>
+      <section id="screen-labs" class="app-page labs-page" data-screen="labs" hidden inert>
+    <section id="discovery" class="discovery-section" aria-labelledby="discovery-title">
+      <div class="section-heading discovery-heading">
+        <div><span class="section-kicker">TWO WAYS TO SEE DIFFERENTLY</span><h2 id="discovery-title" data-screen-title tabindex="-1">집을 보는 시선을<br>한 번 바꿔볼까요?</h2><p class="muted">숫자에 한 번, 내 선택에 한 번. 익숙한 생각을 뒤집어보세요.</p></div>
+        <a class="discovery-shortcut" href="#market" data-route="market">거래 숫자부터 보기 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="discovery-labs">
+        <article id="mix-lab" class="lab-mount" aria-label="가격 착시 탐정"><p class="empty-state">가격 착시 탐정을 준비하고 있어요.</p></article>
+        <article id="blind-lab" class="lab-mount" aria-label="주소 블라인드 선택실험"><p class="empty-state">주소를 가린 선택실험을 준비하고 있어요.</p></article>
+      </div>
+    </section>
+      </section>
+      <section id="screen-plan" class="app-page plan-page" data-screen="plan" hidden inert>
+        <div class="plan-context"><span class="status-dot"></span><span>현재 탐색 중인 지역의 거래 중앙값을 기준으로 계산합니다.</span><button type="button" data-open-search>지역 변경</button></div>
+    <section id="scenario" class="scenario-section" aria-labelledby="scenario-title">
+      <div class="section-heading"><div><span class="section-kicker">MAKE IT YOURS</span><h2 id="scenario-title" data-screen-title tabindex="-1">내 집까지, 얼마나 필요할까?</h2><p class="muted">조건을 바꿔보세요. 매달 부담할 금액과 여유 자금이 달라집니다.</p></div><span class="section-number" aria-hidden="true">₩</span></div>
+      <div class="scenario-grid">
+        <form id="scenario-form" class="panel scenario-inputs">
+          <div class="form-heading"><h3>내 조건 입력</h3><button id="reset-button" class="text-button" type="button">기본값으로</button></div>
+          <div class="money-field"><label for="budget-input">생각하는 매입 예산 <span>만원</span></label><div class="input-unit"><input id="budget-input" type="number" min="100" max="10000000" step="1" value="150000" inputmode="numeric" required><span>만원</span></div><small id="budget-echo">15억원</small></div>
+          <div class="money-field"><label for="equity-input">사용할 수 있는 자기자금 <span>만원</span></label><div class="input-unit"><input id="equity-input" type="number" min="0" max="10000000" step="1" value="70000" inputmode="numeric" required><span>만원</span></div><small id="equity-echo">7억원</small></div>
+          <div class="money-field"><label for="rate-input">예상 대출금리 <span>연</span></label><div class="input-unit"><input id="rate-input" type="number" min="0" max="30" step="0.1" value="4.5" inputmode="decimal" required><span>%</span></div></div>
+          <p class="form-note">기본 가정: 30년 원리금균등 · 공실률 5% · 연 운영비 240만원. 취득비용과 개인별 세금은 별도로 검토하세요.</p>
+          <button id="analyze-button" class="button button-primary" type="submit">이 조건으로 다시 계산 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button>
+        </form>
+        <div class="scenario-results">
+          <article class="scenario-result result-primary"><div><span class="result-label">매월 예상 원리금</span><p id="payment-value" class="result-value">—</p></div><span class="result-icon" aria-hidden="true">₩</span><p>해당 지역 매매 중앙값으로 매입한다고 가정</p></article>
+          <article class="scenario-result"><div><span class="result-label">금리가 2%p 오르면</span><p id="stress-value" class="result-value">—</p></div><span class="result-pill">금리 스트레스</span><p>같은 대출을 높아진 금리로 계산한 월 원리금</p></article>
+          <article class="scenario-result"><div><span class="result-label">월세 운영 시 월 현금흐름</span><p id="cashflow-value" class="result-value">—</p></div><span class="result-pill">가정 기반</span><p>공실·운영비·대출 이자 차감 · 원금상환 제외</p></article>
+          <article class="scenario-result"><div><span class="result-label">전세보증금 10% 감소 시</span><p id="return-gap-value" class="result-value">—</p></div><span class="result-pill">반환 준비금</span><p>다음 계약 때 추가로 마련해야 할 보증금 차액</p></article>
+          <div id="scenario-notes" class="scenario-notes"></div>
+        </div>
+      </div>
+    </section>
+      </section>
+      <section id="screen-saved" class="app-page saved-page" data-screen="saved" aria-labelledby="saved-title" hidden inert>
+        <div class="page-intro"><p class="section-kicker">YOUR SHORTLIST</p><h1 id="saved-title" data-screen-title tabindex="-1">마음에 담아둔 집.</h1><p>다시 보고 싶은 단지를 한곳에 모아보세요.</p></div>
+        <div class="saved-heading"><strong>관심 단지 <span id="saved-count">0</span></strong><span>저장 당시 조건의 거래 집계</span></div>
+        <div id="saved-list" class="saved-list"></div>
+        <div id="saved-empty" class="saved-empty"><span class="empty-heart" aria-hidden="true"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 5.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span><h2>아직 담아둔 집이 없어요.</h2><p>탐색 화면에서 하트를 누르면<br>다음에도 이곳에서 이어서 볼 수 있어요.</p><button type="button" class="button button-primary" data-route="market">관심 단지 찾아보기 <svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button></div>
+        <p class="local-save-note">관심 단지는 이 기기에만 저장됩니다. 저장된 가격은 현재 시세나 현재 매물이 아닙니다.</p>
+      </section>
+      <section id="screen-profile" class="app-page profile-page" data-screen="profile" aria-labelledby="profile-title" hidden inert>
+        <div class="page-intro"><p class="section-kicker">MY LENS</p><h1 id="profile-title" data-screen-title tabindex="-1">내가 보는 동네.</h1></div>
+        <div class="profile-card"><span class="profile-avatar" aria-hidden="true"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21v-2a8 8 0 0 1 16 0v2"></path></svg></span><div><h2 id="profile-display-name">동네탐험가</h2><p id="profile-session-label">체험 프로필 · 실제 회원 인증 없음</p></div><span class="profile-chip">LOCAL</span></div>
+        <div class="profile-shortcuts"><button type="button" data-route="saved"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 5.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>관심 단지</span><span>↗</span></button><button type="button" data-route="plan"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"></rect><path d="M9 7h6m-6 5h1m4 0h1m-6 4h1m4 0h1"></path></svg><span>내 자금 계획</span><span>↗</span></button></div>
+    <section id="methodology" class="methodology-section" aria-labelledby="methodology-heading">
+      <div class="methodology-intro"><span class="section-kicker">TRANSPARENCY, ALWAYS</span><h2 id="methodology-heading">자료와 계산 기준</h2><p>자료의 출처와 계산 방법을 확인하세요.</p></div>
+      <div class="methodology-content">
+        <details class="methodology-details"><summary>어떻게 계산하나요? <span aria-hidden="true">+</span></summary><div id="methodology-details" class="details-body"><p>매매·전세·월세 금액은 선택 조건에 해당하는 거래의 중앙값입니다. 적합도는 매입 예산과 대출 비중을 비교하는 참고 지표입니다.</p><p>거래 표본이 부족하면 점수를 산출하지 않습니다. 임대와 매매는 동일한 주택의 거래가 아닐 수 있습니다.</p></div></details>
+        <details class="methodology-details"><summary>어떤 자료를 사용하나요? <span aria-hidden="true">+</span></summary><div id="source-details" class="details-body"><p>기본 체험에는 가상으로 만든 예시 자료를 사용합니다. 국토교통부 API가 연결되면 신고된 아파트 매매·전월세 거래를 조회할 수 있습니다.</p><p>실거래 자료는 현재 매물의 호가가 아니며, 신고·정정·해제에 따라 달라질 수 있습니다.</p></div></details>
+        <div class="report-actions"><div><strong>살펴본 동네를 남겨두세요.</strong><p>화면 조건을 공유하거나 분석 결과를 파일로 보관하세요.</p></div><div class="report-buttons"><button id="share-button" class="button button-secondary" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 14 4-4m-6 6-2 2a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m4 0 2-2a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" transform="translate(2 -2)"></path></svg>화면 링크</button><button id="download-button" class="button button-secondary" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"></path></svg>분석 저장</button></div></div>
+        <p id="share-help" class="details-body" role="status" hidden></p>
+      </div>
+    </section>
+        <section class="device-settings" aria-labelledby="device-settings-title"><h2 id="device-settings-title">이 기기의 기록</h2><p id="storage-message">프로필·최근 검색·관심 단지는 이 기기에만 저장됩니다. 자금 입력은 저장하지 않습니다.</p><div class="device-setting-actions"><button id="clear-local-data" type="button" class="text-button">저장한 기록 지우기</button><button id="profile-logout" type="button" class="text-button">시작 화면으로</button></div></section>
+        <footer class="profile-footer"><strong>동네렌즈 퀘스트 <span>(Adavanced)</span></strong><p>나에게 맞는 동네를 발견하는, 작은 탐험.</p><p id="updated-at">데이터 조회 대기 중</p><a href="https://rt.molit.go.kr/" target="_blank" rel="noopener noreferrer">국토교통부 실거래가 ↗</a><small>v0.5.0 · MOBILE EDITION</small></footer>
+      </section>
+    </main>
+    <nav class="app-nav" aria-label="앱 주요 메뉴"><button type="button" data-route="home" class="is-active" aria-current="page"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h14V9m-10 12v-7h6v7"></path></svg><span>홈</span></button><button type="button" data-route="market"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg><span>탐색</span></button><button type="button" data-route="labs"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 6.2L21 12l-6.2 2.8L12 21l-2.8-6.2L3 12l6.2-2.8L12 3Z"></path></svg><span>발견</span></button><button type="button" data-route="saved"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 5.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>관심</span></button><button type="button" data-route="profile"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21v-2a8 8 0 0 1 16 0v2"></path></svg><span>마이</span></button></nav>
+  </div>
+
+  <dialog id="search-dialog" class="app-dialog search-dialog" aria-labelledby="search-dialog-title">
+    <div class="dialog-handle" aria-hidden="true"></div><div class="dialog-heading"><div><p class="section-kicker">WHERE TO NEXT?</p><h2 id="search-dialog-title">어떤 동네가 궁금하세요?</h2></div><button type="button" class="icon-button dialog-close" data-close-dialog="search-dialog" aria-label="검색 닫기"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
+        <form id="search-form" class="search-form" role="search">
+          <label class="sr-only" for="region-input">관심 지역 이름</label>
+          <div class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg><input id="region-input" type="search" placeholder="어느 동네가 궁금하세요?" autocomplete="off" required maxlength="80" aria-describedby="search-help search-error"><datalist id="region-options"></datalist></div>
+          <button id="search-button" class="button button-primary" type="submit"><span>동네 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button>
+        </form>
+    <p id="search-error" class="inline-error" role="alert" hidden></p>
+    <p id="search-help" class="search-help">서울 25개 구의 아파트를 살펴볼 수 있어요. 구·동 이름을 입력하거나 아래에서 선택하세요.</p>
+    <div id="search-suggestions" class="search-suggestions" aria-label="지역 검색 제안"></div>
+    <section class="recent-search-section" aria-labelledby="recent-search-title"><h3 id="recent-search-title">최근 살펴본 동네</h3><div id="recent-searches" class="recent-searches"><p class="muted">검색한 동네가 이곳에 모여요.</p></div></section>
+    <section class="suggested-regions" aria-labelledby="suggested-regions-title"><div class="compact-heading"><h3 id="suggested-regions-title">어디서 시작해 볼까요?</h3><span class="tiny-label">빠른 선택</span></div><div class="region-chip-grid"><button type="button" data-region-query="성동구"><span>성동구</span><small>성수동 · 옥수동</small><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button><button type="button" data-region-query="강남구"><span>강남구</span><small>청담동 · 대치동</small><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button><button type="button" data-region-query="마포구"><span>마포구</span><small>공덕동 · 아현동</small><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button><button type="button" data-region-query="송파구"><span>송파구</span><small>잠실동 · 가락동</small><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button></div></section>
+    <div class="search-mode-panel"><label class="mode-control" for="mode-select">자료 선택<select id="mode-select"><option value="demo">가상 예시 체험</option><option value="live">공식 실거래 조회</option></select></label><p>가상 데이터는 실제 시세가 아닙니다. 공식 자료는 서버의 API 연결이 필요합니다.</p></div>
+  </dialog>
+  <dialog id="apartment-dialog" class="app-dialog apartment-dialog" aria-labelledby="apartment-dialog-title"><div class="dialog-handle" aria-hidden="true"></div><div class="dialog-heading"><div><p class="section-kicker">A PLACE IN DETAIL</p><h2 id="apartment-dialog-title">단지 살펴보기</h2></div><button type="button" class="icon-button dialog-close" data-close-dialog="apartment-dialog" aria-label="단지 상세 닫기"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div><div id="apartment-detail-content"></div><div class="detail-actions"><button id="detail-save" class="button button-secondary" type="button" aria-pressed="false"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 5.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>관심 단지 담기</span></button><button id="detail-plan" class="button button-primary" type="button">지역 기준 자금계산 <svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="noscript-note">동네렌즈를 실행하려면 브라우저의 JavaScript를 켜주세요.</p></noscript>
+</body>
+</html>
