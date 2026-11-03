@@ -1,35 +1,22 @@
-동네렌즈 퀘스트 (Adavanced) v0.5.0
+동네렌즈 퀘스트
 
-휴대폰에서 바로 열기
-https://dongne-lens-adavanced-johnny.johnjeongv12.chatgpt.site
-소유자 전용 모바일 웹앱입니다. 앱스토어 설치 파일은 아닙니다.
-실제 게시 버전과 확인 범위: docs/VALIDATION.md
+공개 가상 데이터 체험판
+https://johnnyscalper.github.io/dongne-lens-quest-adavanced/
+로그인·API 키 없이 체험합니다. 실제 시세나 매물이 아닙니다.
 
-가장 빠른 체험
-1. 전체 압축을 풉니다.
-2. play.html을 Chrome/Edge/Firefox 같은 최신 브라우저로 엽니다.
-3. 닉네임으로 체험 프로필을 시작하거나 게스트로 들어갑니다.
-4. 지역 검색 → 거래 화면 → 단지 상세 → 관심집 저장으로 이동합니다.
-   하단 탭에서 두 실험과 내정보를, 자금 계획에서 예산 계산을 사용합니다.
-   현재 시세가 아니며 인터넷/Python/API 키가 필요 없습니다.
+체험 순서
+게스트 진입 → 지역 검색 → 결과 → 하단 발견 → 주소 블라인드 선택실험
+→ 주소 공개 후 최종 선택 → 내 선택의 가격 → B 선택·할인 가정 → 결과 확정
 
-서버 실행
-- Windows: start.bat 실행
-- macOS/Linux: sh start.sh
-- 직접 실행: python3 server.py --host 0.0.0.0 --port 3000
-- 열린 터미널을 유지하고 http://localhost:3000 접속
-- Python 3.11 이상 필요. 추가 패키지 설치는 없습니다.
+설치 없이 실행: play.html을 다운로드해 브라우저로 엽니다.
+Python 실행: python3 server.py --host 0.0.0.0 --port 3000
+Python 3.11 이상, 추가 패키지 설치 없음. http://localhost:3000 접속.
+Replit: 현재 공개 저장소를 가져온 뒤 Run.
+공식 자료는 서버 환경변수 MOLIT_SERVICE_KEY 설정 후 Python 서버에서만 사용합니다.
+Pages는 가상 자료 전용입니다. 키를 소스나 HTML에 넣지 마세요.
 
-Replit
-johnnyscalper/dongne-lens-quest-adavanced 비공개 저장소를 가져오고 Run.
-루트에 server.py, public/, data/, .replit이 있어야 합니다.
-공식 자료는 Secrets의 MOLIT_SERVICE_KEY 설정 후 서버에서만 사용합니다.
+소스 수정 후: python3 build_static.py
+정적 실행본: play.html / dist/index.html
+main 변경 시 GitHub Actions에서 테스트·빌드 후 GitHub Pages로 배포합니다.
 
-체험 프로필은 실제 회원 인증이 아니며 비밀번호를 받지 않습니다.
-닉네임·최근 검색·관심집은 이 브라우저에만 보관합니다.
-금융 입력은 자동 저장하지 않고, 내정보에서 기기 내 기록을 지울 수 있습니다.
-
-소스 수정 후 play.html 갱신
-python3 build_static.py
-
-자세한 안내: README.md / docs/MOBILE.md / docs/REPLIT.md / docs/VALIDATION.md
+자세한 안내와 검수 범위: README.md / docs/REPLIT.md / docs/VALIDATION.md
