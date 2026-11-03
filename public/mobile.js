@@ -117,7 +117,7 @@
     if (value >= 100000000) return `${(value / 100000000).toLocaleString('ko-KR', { maximumFractionDigits: 2 })}억`;
     return `${(value / 10000).toLocaleString('ko-KR', { maximumFractionDigits: 1 })}만원`;
   };
-  const routeLabels = Object.freeze({ home: '동네렌즈', market: '동네 탐색', labs: '두 가지 실험', plan: '내 자금 계획', saved: '관심 단지', profile: '마이 렌즈' });
+  const routeLabels = Object.freeze({ home: '동네렌즈 퀘스트', market: '동네 탐색', labs: '두 가지 실험', plan: '내 자금 계획', saved: '관심 단지', profile: '마이 렌즈' });
   const state = {
     initialized: false, entered: false, guest: true, nickname: '', route: 'home', index: 0,
     dialog: null, dialogFocus: null, closingNative: false, regions: [], saved: [], recent: [],
@@ -624,6 +624,20 @@
     screenEvent('welcome');
   }
 
+  // Mobile sheets follow the visible viewport, including an open software keyboard.
+  function syncVisibleViewport() {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+    document.documentElement.style.setProperty('--visible-height', `${viewport.height}px`);
+    document.documentElement.style.setProperty('--visible-top', `${viewport.offsetTop}px`);
+    const editing = document.activeElement?.matches?.('input:not([type="range"]), textarea, select');
+    document.body.classList.toggle('is-editing', Boolean(editing));
+  }
+  window.visualViewport?.addEventListener('resize', syncVisibleViewport);
+  window.visualViewport?.addEventListener('scroll', syncVisibleViewport);
+  document.addEventListener('focusin', syncVisibleViewport);
+  document.addEventListener('focusout', () => setTimeout(syncVisibleViewport, 0));
+  syncVisibleViewport();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 })();

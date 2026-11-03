@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080a0f">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="동네렌즈 퀘스트 (Adavanced). 3D 동네 탐험, 가격 착시 탐정, 주소 블라인드 선택실험으로 거래 숫자와 나의 기준을 살펴보세요.">
-  <title>동네렌즈 퀘스트 (Adavanced) — 다음 집으로 가는, 나만의 궤도</title>
+  <meta name="description" content="동네렌즈 퀘스트. 3D 동네 탐험, 가격 착시 탐정, 주소 블라인드 선택실험으로 거래 숫자와 나의 기준을 살펴보세요.">
+  <title>동네렌즈 퀘스트</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23080a0f'/%3E%3Ccircle cx='18' cy='18' r='9' stroke='%2399f6d2' stroke-width='3' fill='none'/%3E%3Cpath d='m25 25 7 7M13 20v-5l5-4 5 4v5' fill='none' stroke='%23a798ff' stroke-width='2'/%3E%3C/svg%3E">
   <style>
 /* styles.css */
@@ -559,6 +559,48 @@ input::placeholder { color: #929eae; }
 @media(prefers-reduced-motion:reduce) {
   .lab-action,.blind-candidate { transition: none; }
   .lab-action:hover:not(:disabled),.blind-candidate:hover { transform: none; }
+}
+.price-lab { margin-top: 28px; padding: clamp(14px, 3vw, 28px); border: 1px solid #9dd7c74d; border-radius: 24px; background: linear-gradient(145deg,#142520,#111916 70%); color: #f5f3e9; box-shadow: 0 16px 40px #00000020; overflow-wrap: anywhere; }
+.price-lab h4 { margin: 10px 0; font-size: clamp(24px,4vw,34px); letter-spacing: -.04em; }
+.price-lab h5 { font-size: 20px; margin: 12px 0; }
+.price-lab p { line-height: 1.65; }
+.price-lab .lab-footnote { color: #bbc9c2; }
+.price-cards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin: 20px 0; }
+.price-card { min-width: 0; padding: 20px; border-radius: 20px; border: 1px solid #b5c7ba40; background: linear-gradient(145deg,#ffffff0d,#ffffff03); box-shadow: 0 8px 22px #00000018; }
+.price-card.is-selected { border-color: #9af5ce; background: linear-gradient(145deg,#9af5ce22,#9af5ce07); }
+.price-mark,.price-selection { font-size: 12px; font-weight: 700; color: #a8f0d1; }
+.price-location { color: #bac8c0; font-size: 13px; }
+.price-facts { margin: 0; }
+.price-facts>div { padding: 12px 0; border-bottom: 1px solid #ffffff14; }
+.price-facts dt { font-size: 11px; color: #bac8c0; }
+.price-facts dd { margin: 6px 0 0; font-size: 15px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.price-facts .price-number { font-size: clamp(18px,2.5vw,27px); font-weight: 800; color: #b3f6d9; letter-spacing: -.04em; }
+.price-label { display: block; font-weight: 700; font-size: 14px; margin: 18px 0 8px; }
+.price-select { box-sizing: border-box; width: 100%; min-width: 0; min-height: 48px; border: 1px solid #90b8a4; border-radius: 12px; background: #182820; color: #f5f3e9; padding: 10px; font: inherit; font-size: 14px; }
+.price-discount-value { display: block; font-size: 38px; font-weight: 800; font-variant-numeric: tabular-nums; color: #b3f6d9; }
+.price-slider-row { display: flex; align-items: center; gap: 12px; }
+.price-step { flex: 0 0 48px; min-height: 48px; border: 1px solid #b5c7ba70; border-radius: 14px; background: #ffffff0d; color: #f5f3e9; font-size: 24px; cursor: pointer; }
+.price-step:disabled { opacity: .35; cursor: default; }
+.price-range { width: 100%; min-width: 0; height: 48px; accent-color: #9af5ce; cursor: pointer; }
+.price-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+.price-lab .lab-action { white-space: normal; min-height: 48px; max-width: 100%; background: #b3f6d9; color: #14251c; border-color: #b3f6d9; box-shadow: 0 3px 10px #00000018; }
+.price-lab .lab-text-button { color: #b3f6d9; min-height: 48px; }
+.price-result { border-top: 1px solid #ffffff26; padding-top: 20px; }
+.price-trail { padding: 0; list-style: none; display: grid; gap: 12px; }
+.price-trail li { border-left: 2px solid #9af5ce; padding-left: 12px; }
+.price-trail span { display: block; font-size: 12px; color: #bac8c0; margin-bottom: 5px; }
+.price-trail strong { font-size: 14px; }
+.price-copy-text { box-sizing: border-box; width: 100%; min-width: 0; resize: vertical; border: 1px solid #ffffff35; border-radius: 12px; padding: 12px; background: #0e1813; color: #e5f5eb; font: inherit; font-size: 13px; line-height: 1.7; margin-bottom: 14px; }
+.price-copy-feedback { font-size: 13px; color: #b3f6d9; }
+.price-lab :is(button,input,select,textarea):focus-visible { outline: 3px solid #b3f6d9; outline-offset: 4px; }
+@media(max-width:600px) {
+  .price-cards { grid-template-columns: minmax(0,1fr); }
+  .price-card { padding: 14px; }
+  .price-actions { flex-direction: column; }
+  .price-actions button { width: 100%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .price-lab * { transition: none!important; animation: none!important; }
 }
 @media print {
   .lab-card { break-inside: avoid; box-shadow: none; }
@@ -1216,6 +1258,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .apartment-price { font-size: 25px; }
 }
 body.has-dialog { overflow: hidden; }
+/* Submission polish: consistent controls and unobstructed focus targets. */
+html { scroll-padding-block: 90px 110px; }
+:is(button,input,select,textarea) { scroll-margin-block: 90px 110px; }
+.price-lab { margin-block: 24px; }
+.price-lab .price-select,.price-lab .price-copy-text { font-size: 16px; }
+.price-lab .price-actions { gap: 12px; }
+.price-lab .price-actions .lab-action { font-size: 14px; padding: 12px 16px; border-radius: 14px; line-height: 1.5; }
+.price-lab .price-number { line-height: 1.4; }
+.price-lab .price-result { margin-top: 24px; }
+@media(max-width:600px) {
+  .app-header-title { display: none; }
+  .app-wordmark { font-size: 17px; gap: 8px; }
+  .welcome-header .brand-name { font-size: 18px; letter-spacing: -.8px; }
+  .welcome-header .edition-label { display: none; }
+  body.is-editing .app-nav,body.has-dialog .app-nav { visibility: hidden; pointer-events: none; }
+  .app-dialog { position: fixed; top: var(--visible-top,0px); bottom: auto; margin-block: 8px; max-height: calc(var(--visible-height,100dvh) - 16px); }
+  .search-dialog .search-form { position: sticky; top: 0; z-index: 2; padding-block: 8px; background: #141c23; }
+  .price-lab { padding: 16px 12px; }
+  .price-lab .price-card { padding: 16px 12px; }
+}
 .manual-share-url { display: block; overflow-wrap: anywhere; margin-top: 8px; color: #b7e6cd; text-decoration: underline; text-underline-offset: 3px; }
 .welcome-header .brand { min-height: 44px; }
 @media (max-width: 1024px) {
@@ -1234,7 +1296,7 @@ body.has-dialog { overflow: hidden; }
 <body id="top" data-auth="welcome" data-screen="home">
   <a class="skip-link" href="#profile-form">시작 방법으로 바로가기</a>
   <section id="welcome-screen" class="welcome-screen" aria-labelledby="hero-title">
-    <header class="welcome-header"><a class="brand" href="#top" aria-label="동네렌즈 퀘스트 (Adavanced) 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span class="brand-name">동네렌즈<span class="brand-beta">(Adavanced)</span></span></a><span class="edition-label">MOBILE EDITION <span>05</span></span><a class="welcome-jump" href="#profile-form">체험 시작 ↗</a></header>
+    <header class="welcome-header"><a class="brand" href="#top" aria-label="동네렌즈 퀘스트 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span class="brand-name">동네렌즈 퀘스트</span></a><span class="edition-label">MOBILE EDITION <span>05</span></span><a class="welcome-jump" href="#profile-form">체험 시작 ↗</a></header>
     <div class="welcome-layout">
       <div class="welcome-story">
         <p class="eyebrow"><span class="status-dot"></span> YOUR NEXT CHAPTER</p>
@@ -1264,7 +1326,7 @@ body.has-dialog { overflow: hidden; }
   <div id="app-shell" class="app-shell" hidden>
     <header class="app-header">
       <div class="app-header-inner">
-        <div class="app-header-leading"><button id="screen-back" class="icon-button" type="button" aria-label="이전 화면으로" hidden><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"></path></svg></button><button type="button" class="app-wordmark" data-route="home" aria-label="동네렌즈 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span>동네렌즈<small>(Adavanced)</small></span></button></div>
+        <div class="app-header-leading"><button id="screen-back" class="icon-button" type="button" aria-label="이전 화면으로" hidden><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"></path></svg></button><button type="button" class="app-wordmark" data-route="home" aria-label="동네렌즈 퀘스트 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span>동네렌즈 퀘스트</span></button></div>
         <strong id="app-header-title" class="app-header-title">홈</strong>
         <button class="icon-button header-search" type="button" data-open-search aria-label="지역 검색"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></button>
       </div>
@@ -1389,7 +1451,7 @@ body.has-dialog { overflow: hidden; }
       </div>
     </section>
         <section class="device-settings" aria-labelledby="device-settings-title"><h2 id="device-settings-title">이 기기의 기록</h2><p id="storage-message">프로필·최근 검색·관심 단지는 이 기기에만 저장됩니다. 자금 입력은 저장하지 않습니다.</p><div class="device-setting-actions"><button id="clear-local-data" type="button" class="text-button">저장한 기록 지우기</button><button id="profile-logout" type="button" class="text-button">시작 화면으로</button></div></section>
-        <footer class="profile-footer"><strong>동네렌즈 퀘스트 <span>(Adavanced)</span></strong><p>나에게 맞는 동네를 발견하는, 작은 탐험.</p><p id="updated-at">데이터 조회 대기 중</p><a href="https://rt.molit.go.kr/" target="_blank" rel="noopener noreferrer">국토교통부 실거래가 ↗</a><small>v0.5.0 · MOBILE EDITION</small></footer>
+        <footer class="profile-footer"><strong>동네렌즈 퀘스트</strong><p>나에게 맞는 동네를 발견하는, 작은 탐험.</p><p id="updated-at">데이터 조회 대기 중</p><a href="https://rt.molit.go.kr/" target="_blank" rel="noopener noreferrer">국토교통부 실거래가 ↗</a><small>v0.5.0 · MOBILE EDITION</small></footer>
       </section>
     </main>
     <nav class="app-nav" aria-label="앱 주요 메뉴"><button type="button" data-route="home" class="is-active" aria-current="page"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h14V9m-10 12v-7h6v7"></path></svg><span>홈</span></button><button type="button" data-route="market"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg><span>탐색</span></button><button type="button" data-route="labs"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 6.2L21 12l-6.2 2.8L12 21l-2.8-6.2L3 12l6.2-2.8L12 3Z"></path></svg><span>발견</span></button><button type="button" data-route="saved"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 5.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>관심</span></button><button type="button" data-route="profile"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21v-2a8 8 0 0 1 16 0v2"></path></svg><span>마이</span></button></nav>
@@ -1411,7 +1473,7 @@ body.has-dialog { overflow: hidden; }
   </dialog>
   <dialog id="apartment-dialog" class="app-dialog apartment-dialog" aria-labelledby="apartment-dialog-title"><div class="dialog-handle" aria-hidden="true"></div><div class="dialog-heading"><div><p class="section-kicker">A PLACE IN DETAIL</p><h2 id="apartment-dialog-title">단지 살펴보기</h2></div><button type="button" class="icon-button dialog-close" data-close-dialog="apartment-dialog" aria-label="단지 상세 닫기"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div><div id="apartment-detail-content"></div><div class="detail-actions"><button id="detail-save" class="button button-secondary" type="button" aria-pressed="false"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 5.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>관심 단지 담기</span></button><button id="detail-plan" class="button button-primary" type="button">지역 기준 자금계산 <svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-  <noscript><p class="noscript-note">동네렌즈를 실행하려면 브라우저의 JavaScript를 켜주세요.</p></noscript>
+  <noscript><p class="noscript-note">동네렌즈 퀘스트를 실행하려면 브라우저의 JavaScript를 켜주세요.</p></noscript>
 <script>
 globalThis.DONGNE_RUNTIME = 'local';
 globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구","aliases":["서울 종로","종로구","종로","혜화","평창","사직"],"neighborhoods":["혜화동","평창동","사직동"]},{"code":"11140","name":"서울특별시 중구","aliases":["서울 중구","중구","신당","황학","중림"],"neighborhoods":["신당동","황학동","중림동"]},{"code":"11170","name":"서울특별시 용산구","aliases":["서울 용산","용산구","용산","이촌","한남","이태원"],"neighborhoods":["이촌동","한남동","이태원동"]},{"code":"11200","name":"서울특별시 성동구","aliases":["서울 성동","성동구","성동","성수","성수동","왕십리","금호","옥수"],"neighborhoods":["성수동1가","성수동2가","하왕십리동","금호동4가","옥수동"]},{"code":"11215","name":"서울특별시 광진구","aliases":["서울 광진","광진구","광진","자양","광장","구의","건대"],"neighborhoods":["자양동","광장동","구의동"]},{"code":"11230","name":"서울특별시 동대문구","aliases":["동대문구","동대문","전농","답십리","장안","이문"],"neighborhoods":["전농동","답십리동","장안동","이문동"]},{"code":"11260","name":"서울특별시 중랑구","aliases":["중랑구","중랑","면목","상봉","신내"],"neighborhoods":["면목동","상봉동","신내동"]},{"code":"11290","name":"서울특별시 성북구","aliases":["성북구","성북","길음","돈암","장위"],"neighborhoods":["길음동","돈암동","장위동"]},{"code":"11305","name":"서울특별시 강북구","aliases":["강북구","강북","미아","수유","번동"],"neighborhoods":["미아동","수유동","번동"]},{"code":"11320","name":"서울특별시 도봉구","aliases":["도봉구","도봉","창동","쌍문"],"neighborhoods":["창동","쌍문동","도봉동"]},{"code":"11350","name":"서울특별시 노원구","aliases":["노원구","노원","상계","중계","하계","공릉"],"neighborhoods":["상계동","중계동","하계동","공릉동"]},{"code":"11380","name":"서울특별시 은평구","aliases":["은평구","은평","불광","응암","진관"],"neighborhoods":["불광동","응암동","진관동"]},{"code":"11410","name":"서울특별시 서대문구","aliases":["서대문구","서대문","북아현","남가좌","홍제"],"neighborhoods":["북아현동","남가좌동","홍제동"]},{"code":"11440","name":"서울특별시 마포구","aliases":["마포구","마포","아현","공덕","상암","합정"],"neighborhoods":["아현동","공덕동","상암동","합정동"]},{"code":"11470","name":"서울특별시 양천구","aliases":["양천구","양천","목동","신정","신월"],"neighborhoods":["목동","신정동","신월동"]},{"code":"11500","name":"서울특별시 강서구","aliases":["강서구","강서","마곡","등촌","화곡","가양"],"neighborhoods":["마곡동","등촌동","화곡동","가양동"]},{"code":"11530","name":"서울특별시 구로구","aliases":["구로구","구로","신도림","고척","개봉"],"neighborhoods":["구로동","신도림동","고척동","개봉동"]},{"code":"11545","name":"서울특별시 금천구","aliases":["금천구","금천","독산","시흥동","가산"],"neighborhoods":["독산동","시흥동","가산동"]},{"code":"11560","name":"서울특별시 영등포구","aliases":["영등포구","영등포","여의도","당산","문래"],"neighborhoods":["여의도동","당산동5가","문래동3가"]},{"code":"11590","name":"서울특별시 동작구","aliases":["동작구","동작","흑석","상도","사당"],"neighborhoods":["흑석동","상도동","사당동"]},{"code":"11620","name":"서울특별시 관악구","aliases":["관악구","관악","봉천","신림","남현"],"neighborhoods":["봉천동","신림동","남현동"]},{"code":"11650","name":"서울특별시 서초구","aliases":["서초구","서초","반포","잠원","방배","양재"],"neighborhoods":["서초동","반포동","잠원동","방배동","양재동"]},{"code":"11680","name":"서울특별시 강남구","aliases":["서울 강남","강남구","강남","청담","청담동","압구정","삼성동","역삼","대치","도곡","개포","일원","수서"],"neighborhoods":["청담동","압구정동","삼성동","역삼동","대치동","도곡동","개포동","일원동","수서동"]},{"code":"11710","name":"서울특별시 송파구","aliases":["송파구","송파","잠실","가락","문정","방이","위례"],"neighborhoods":["잠실동","가락동","문정동","방이동","장지동"]},{"code":"11740","name":"서울특별시 강동구","aliases":["강동구","강동","고덕","상일","명일","둔촌","암사","천호"],"neighborhoods":["고덕동","상일동","명일동","둔촌동","암사동","천호동"]}];
@@ -2588,6 +2650,29 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
 </script>
 <script>
 /* labs.js */
+/* Pure scenario model: never writes to a candidate or to market records. */
+globalThis.DongnePriceChoice = {
+  price(base, discount) {
+    if (!Number.isSafeInteger(base) || base <= 0 || !Number.isInteger(discount) || discount < 0 || discount > 30) return null;
+    const assumed = Math.round(base * (100 - discount) / 100);
+    return { base, assumed, discount, difference: base - assumed };
+  },
+  create() {
+    return {
+      b: null, discount: 0, decision: null,
+      reset(b = null) { this.b = b; this.discount = 0; this.decision = null; },
+      adjust(value) {
+        if (!Number.isInteger(value) || value < 0 || value > 30) return false;
+        this.discount = value; this.decision = null; return true;
+      },
+      confirm(choice, base) {
+        const quote = globalThis.DongnePriceChoice.price(base, this.discount);
+        if (!this.b || !quote || !['a', 'b', 'unsure'].includes(choice)) return false;
+        this.decision = Object.freeze({ choice, b: this.b, ...quote }); return true;
+      }
+    };
+  }
+};
 /* Two small decision experiments. All selections stay in this page's memory. */
 (() => {
   'use strict';
@@ -2605,6 +2690,8 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
   }
 
   const state = { sequence: 0, controller: null, exampleController: null, exampleSequence: 0, context: null, result: null, example: null, useExample: false, adjusted: false, loading: false, error: '', exampleError: '', exampleLoading: false, selected: null, firstChoice: null, stage: 'blind' };
+  const scenario = globalThis.DongnePriceChoice.create();
+  let priceStage = 'invite';
   const finite = (value) => typeof value === 'number' && Number.isFinite(value);
   const num = (value, digits = 1) => finite(value) ? value.toLocaleString('ko-KR', { maximumFractionDigits: digits }) : '—';
   const money = (value) => !finite(value) ? '자료 부족' : value >= 100000000 ? `${num(value / 100000000, 2)}억` : `${num(value / 10000, 0)}만원`;
@@ -2777,6 +2864,7 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
   }
 
   function renderBlind() {
+    announce(blindRoot, '');
     blindHost.className = 'lab-card blind-lab-card'; blindRoot.replaceChildren();
     append(blindRoot, heading('02', '주소 블라인드 선택실험', '동네 이름을 잠깐 가리면, 어떤 집이 눈에 들어올까요?'));
     const toolbar = make('div', 'lab-toolbar');
@@ -2840,6 +2928,7 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
       }
       blindRoot.append(reflection);
     }
+    if (state.stage === 'done') renderPriceChoice(data.candidates);
     const details = make('details', 'lab-details');
     append(details, make('summary', '', `어떤 후보를 보여주나요? · 조건을 충족한 구간 ${num(data.eligible_cohorts, 0)}개`));
     const notes = make('div', 'lab-details-body');
@@ -2849,6 +2938,135 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
     blindRoot.append(make('p', 'lab-footnote', '현재 매물·투자 추천·성향 진단이 아닙니다. 선택 기록은 이 페이지 안에서만 유지됩니다.'));
   }
 
+  function renderPriceChoice(candidates) {
+    const panel = make('section', 'price-lab');
+    panel.setAttribute('aria-label', '내 선택의 가격');
+    append(panel, make('span', 'lab-eyebrow', 'PRICE PLAY · 선택의 다음 장'), make('h4', '', '내 선택의 가격'));
+    blindRoot.append(panel);
+    const refresh = (selector = '.price-title') => { renderBlind(); focusAfterRender(blindRoot, selector); };
+    if (priceStage !== 'active') {
+      panel.append(make('p', '', priceStage === 'skip' ? '가격 실험은 건너뛰었어요. 원할 때 이어갈 수 있습니다.' : '주소를 확인한 내 선택, 가격 조건만 달라져도 같을까요?'));
+      append(panel, button('가격이 달라지면 내 선택도 바뀔까?', 'lab-action price-start', () => { priceStage = 'active'; refresh(); }));
+      if (priceStage !== 'skip') panel.append(button('이번에는 건너뛰기', 'lab-text-button', () => { priceStage = 'skip'; refresh('.price-start'); }));
+      return;
+    }
+    const title = make('p', 'price-title', '최종 선택은 A, 다시 비교할 집은 B');
+    title.tabIndex = -1; panel.append(title);
+    append(panel, badge(sourceText()), make('p', 'lab-footnote', '가격만 바꾸는 가정 실험입니다. 실제 적정가·투자 추천·심리 진단·정확한 선택 전환점이 아닙니다. 원본 거래·관심집·자금계획에는 반영하지 않습니다.'));
+    const a = candidates.find(item => item.id === state.selected);
+    if (!a || !globalThis.DongnePriceChoice.price(a.sale_krw, 0)) {
+      panel.append(statusBox('A의 기준 가격이 유효하지 않아 가격 실험을 진행할 수 없습니다.')); return;
+    }
+    const others = candidates.filter(item => item.id !== a.id);
+    const label = make('label', 'price-label', '비교할 후보 B');
+    label.htmlFor = 'price-candidate';
+    const select = make('select', 'price-select'); select.id = 'price-candidate';
+    const placeholder = make('option', '', '다른 후보를 골라주세요'); placeholder.value = ''; select.append(placeholder);
+    others.forEach(item => {
+      const option = make('option', '', `${item.name} · ${num(item.area_m2)}㎡`);
+      option.value = item.id; select.append(option);
+    });
+    select.value = scenario.b || '';
+    select.addEventListener('change', () => { scenario.reset(select.value || null); refresh('#price-candidate'); });
+    append(panel, label, select);
+    if (!others.length) { panel.append(statusBox('비교할 다른 후보가 부족합니다. 조회 조건을 넓혀주세요.')); return; }
+    const b = others.find(item => item.id === scenario.b);
+    if (!b) { panel.append(statusBox('B를 고르면 0~30% 가격 시나리오를 시작합니다.')); return; }
+    if (!globalThis.DongnePriceChoice.price(b.sale_krw, 0)) { panel.append(statusBox('B의 기준 가격이 유효하지 않습니다. 다른 후보를 골라주세요.')); return; }
+    const exact = value => `${value.toLocaleString('ko-KR')}원`;
+    const grid = make('div', 'price-cards');
+    let priceNode, differenceNode, discountNode;
+    const cards = [];
+    for (const [letter, item] of [['A', a], ['B', b]]) {
+      const card = make('article', 'price-card'); cards.push(card);
+      const mark = make('span', 'price-mark', letter === 'A' ? 'A · 주소 공개 후 선택' : 'B · 가격을 바꿔볼 후보');
+      append(card, mark, make('h5', '', item.name), make('p', 'price-location', item.neighborhood));
+      const facts = make('dl', 'price-facts');
+      const fact = (key, value, cls = '') => {
+        const dd = make('dd', cls, value); append(facts, append(make('div'), make('dt', '', key), dd)); return dd;
+      };
+      fact('원래 기준 가격 · 매매 중앙값', exact(item.sale_krw));
+      if (letter === 'B') {
+        priceNode = fact('조절한 가정 가격 · 실제 가격 아님', '', 'price-number');
+        discountNode = fact('가정 할인율', '');
+        differenceNode = fact('기준 대비 차액', '');
+      }
+      fact('기존 면적 중앙값 / 매매 표본', `${num(item.area_m2)}㎡ / ${num(item.sale_count, 0)}건`);
+      fact('데이터 출처', `${sourceText()} · ${state.context.market.source?.label || '거래 집계'}`);
+      fact('거래 기간', `${item.first_date} – ${item.last_date}`);
+      append(card, facts, make('p', 'price-selection', '아직 가격 선택을 확정하지 않았어요')); grid.append(card);
+    }
+    panel.append(grid);
+    const controls = make('div', 'price-controls');
+    const rangeLabel = make('label', 'price-label', 'B의 가정 할인율'); rangeLabel.htmlFor = 'price-discount';
+    const output = make('output', 'price-discount-value'); output.htmlFor = 'price-discount';
+    const range = make('input', 'price-range'); range.type = 'range'; range.id = 'price-discount'; range.min = '0'; range.max = '30'; range.step = '1';
+    const minus = button('−', 'price-step', () => change(scenario.discount - 1)); minus.setAttribute('aria-label', '할인율 1% 줄이기');
+    const plus = button('+', 'price-step', () => change(scenario.discount + 1)); plus.setAttribute('aria-label', '할인율 1% 늘리기');
+    const row = append(make('div', 'price-slider-row'), minus, range, plus);
+    append(controls, rangeLabel, output, row, make('p', 'lab-footnote', '0% 그대로 ↔ 30% 낮게 · 1%씩 조절 / 버튼을 눌러야 선택이 확정됩니다.'));
+    panel.append(controls);
+    const actions = make('div', 'price-actions');
+    const result = make('div', 'price-result'); result.tabIndex = -1;
+    function renderResult() {
+      result.replaceChildren();
+      const decision = scenario.decision;
+      cards.forEach((card, index) => {
+        const chosen = decision?.choice === (index === 0 ? 'a' : 'b');
+        card.classList.toggle('is-selected', chosen);
+        card.querySelector('.price-selection').textContent = chosen ? '✓ 가정 가격 적용 후 선택 확정' : decision ? '선택하지 않음' : '아직 가격 선택을 확정하지 않았어요';
+      });
+      if (!decision) { result.append(make('p', '', '가격은 가정일 뿐, 선택은 아직 확정되지 않았어요.')); return; }
+      const first = candidates.find(item => item.id === state.firstChoice);
+      const sentence = `B의 가정 가격을 기준보다 ${decision.discount}% 낮춘 시나리오에서 ${decision.choice === 'b' ? 'B를 선택했습니다.' : decision.choice === 'a' ? 'A를 유지했습니다.' : '판단이 어렵다고 답했습니다.'}`;
+      append(result, make('span', 'lab-eyebrow', 'MY CHOICE · 세 번의 기록'), make('h5', '', '가격 조건을 바꾼 뒤의 내 선택'));
+      const trail = make('ol', 'price-trail');
+      [['주소 공개 전', first?.name], ['주소 공개 후', `A · ${a.name}`], ['가정 가격 적용 후', decision.choice === 'unsure' ? '판단 어려움' : decision.choice === 'a' ? `A · ${a.name}` : `B · ${b.name}`]].forEach(([step, value]) => trail.append(append(make('li'), make('span', '', step), make('strong', '', value))));
+      result.append(trail);
+      const summary = make('textarea', 'price-copy-text');
+      summary.readOnly = true; summary.rows = 7; summary.setAttribute('aria-label', '복사할 결과 문구');
+      summary.value = `${sentence}\n주소 공개 전: ${first?.name}\n주소 공개 후: A · ${a.name}\nB: ${b.name}\n기준 ${exact(decision.base)} → 가정 ${exact(decision.assumed)} (차액 ${exact(decision.difference)})\n${sourceText()} · 가격 가정 선택 실험이며 실제 적정가·투자 추천·심리 진단·정확한 선택 전환점이 아닙니다.`;
+      const feedback = make('p', 'price-copy-feedback'); feedback.setAttribute('role', 'status');
+      append(result, make('p', '', sentence), summary,
+        button('결과 문구 복사', 'lab-action lab-action-secondary', async () => {
+          try {
+            if (!navigator.clipboard?.writeText) throw new Error('unsupported');
+            await navigator.clipboard.writeText(summary.value);
+            feedback.textContent = '결과 문구를 복사했습니다.';
+          } catch {
+            summary.focus(); summary.select();
+            feedback.textContent = '자동 복사를 사용할 수 없습니다. 위 텍스트를 길게 눌러 선택하거나 복사해 주세요.';
+          }
+        }), feedback,
+        button('다시 해보기', 'lab-text-button', () => { scenario.reset(); refresh('#price-candidate'); }));
+    }
+    function change(value) {
+      if (!scenario.adjust(value)) return;
+      update(); renderResult();
+      announce(blindRoot, '가격 가정이 바뀌었습니다. 선택을 다시 확정해 주세요.');
+    }
+    function update() {
+      const quote = globalThis.DongnePriceChoice.price(b.sale_krw, scenario.discount);
+      range.value = String(scenario.discount); range.setAttribute('aria-valuetext', `${scenario.discount}% 할인, 가정 가격 ${exact(quote.assumed)}`);
+      output.textContent = `${scenario.discount}%`;
+      // Update the exact number synchronously; animate only its appearance, never its value.
+      priceNode.textContent = exact(quote.assumed);
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && priceNode.animate) {
+        priceNode.getAnimations().forEach(animation => animation.cancel());
+        priceNode.animate([{ opacity: .55, transform: 'translateY(2px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 140 });
+      }
+      discountNode.textContent = `${scenario.discount}% 낮춤`; differenceNode.textContent = `${exact(quote.difference)} 낮음`;
+      minus.disabled = scenario.discount === 0; plus.disabled = scenario.discount === 30;
+    }
+    range.addEventListener('input', () => change(Number(range.value)));
+    for (const [choice, text] of [['b', '이 가격이면 B 선택'], ['a', 'A 유지'], ['unsure', '판단 어려움']]) {
+      actions.append(button(text, 'lab-action', () => {
+        if (scenario.confirm(choice, b.sale_krw)) { renderResult(); result.focus({ preventScroll: true }); announce(blindRoot, '가격 시나리오 선택을 확정했습니다. 아래 결과를 확인하세요.'); }
+      }));
+    }
+    append(panel, actions, result); update(); renderResult();
+  }
+
   function choose(id) {
     if (state.stage === 'blind') { state.firstChoice = id; state.stage = 'reveal'; }
     else state.stage = 'done';
@@ -2856,7 +3074,7 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
     renderBlind(); focusAfterRender(blindRoot, '.blind-reflection');
     announce(blindRoot, '집의 이름과 동네를 공개했습니다. 선택을 돌아보세요.');
   }
-  function resetChoice() { state.selected = null; state.firstChoice = null; state.stage = 'blind'; }
+  function resetChoice() { state.selected = null; state.firstChoice = null; state.stage = 'blind'; scenario.reset(); priceStage = 'invite'; }
   function clear() {
     ++state.sequence; state.controller?.abort();
     ++state.exampleSequence; state.exampleController?.abort();
@@ -3009,7 +3227,7 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
     if (value >= 100000000) return `${(value / 100000000).toLocaleString('ko-KR', { maximumFractionDigits: 2 })}억`;
     return `${(value / 10000).toLocaleString('ko-KR', { maximumFractionDigits: 1 })}만원`;
   };
-  const routeLabels = Object.freeze({ home: '동네렌즈', market: '동네 탐색', labs: '두 가지 실험', plan: '내 자금 계획', saved: '관심 단지', profile: '마이 렌즈' });
+  const routeLabels = Object.freeze({ home: '동네렌즈 퀘스트', market: '동네 탐색', labs: '두 가지 실험', plan: '내 자금 계획', saved: '관심 단지', profile: '마이 렌즈' });
   const state = {
     initialized: false, entered: false, guest: true, nickname: '', route: 'home', index: 0,
     dialog: null, dialogFocus: null, closingNative: false, regions: [], saved: [], recent: [],
@@ -3516,6 +3734,20 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
     screenEvent('welcome');
   }
 
+  // Mobile sheets follow the visible viewport, including an open software keyboard.
+  function syncVisibleViewport() {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+    document.documentElement.style.setProperty('--visible-height', `${viewport.height}px`);
+    document.documentElement.style.setProperty('--visible-top', `${viewport.offsetTop}px`);
+    const editing = document.activeElement?.matches?.('input:not([type="range"]), textarea, select');
+    document.body.classList.toggle('is-editing', Boolean(editing));
+  }
+  window.visualViewport?.addEventListener('resize', syncVisibleViewport);
+  window.visualViewport?.addEventListener('scroll', syncVisibleViewport);
+  document.addEventListener('focusin', syncVisibleViewport);
+  document.addEventListener('focusout', () => setTimeout(syncVisibleViewport, 0));
+  syncVisibleViewport();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 })();
@@ -4147,7 +4379,7 @@ globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구",
   function downloadReport() {
     if (!state.analysis || !state.market) return;
     const report = {
-      app: '동네렌즈 퀘스트 (Adavanced)', version: state.config?.app_version || '0.5.0', runtime: LOCAL_RUNTIME ? 'local' : 'server', generated_at: new Date().toISOString(), mode: state.market.mode,
+      app: '동네렌즈 퀘스트', version: state.config?.app_version || '0.5.0', runtime: LOCAL_RUNTIME ? 'local' : 'server', generated_at: new Date().toISOString(), mode: state.market.mode,
       disclaimer: state.market.mode === 'demo' ? '모든 거래는 가상 예시입니다. 실제 시세 또는 투자 판단 자료가 아닙니다.' : '신고된 과거 거래자료 기반의 조건 비교이며, 투자 수익·대출 승인·현재 매물 호가를 보장하지 않습니다.',
       region: state.region, period: state.market.period, source: state.market.source, fetched_at: state.market.fetched_at, coverage: state.market.coverage,
       filters: { area_band: $('area-select').value, neighborhood: $('neighborhood-select').value }, assumptions: state.assumptions, analysis: state.analysis
