@@ -624,6 +624,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .apartment-price { font-size: 25px; }
 }
 body.has-dialog { overflow: hidden; }
+/* Submission polish: consistent controls and unobstructed focus targets. */
+html { scroll-padding-block: 90px 110px; }
+:is(button,input,select,textarea) { scroll-margin-block: 90px 110px; }
+.price-lab { margin-block: 24px; }
+.price-lab .price-select,.price-lab .price-copy-text { font-size: 16px; }
+.price-lab .price-actions { gap: 12px; }
+.price-lab .price-actions .lab-action { font-size: 14px; padding: 12px 16px; border-radius: 14px; line-height: 1.5; }
+.price-lab .price-number { line-height: 1.4; }
+.price-lab .price-result { margin-top: 24px; }
+@media(max-width:600px) {
+  .app-header-title { display: none; }
+  .app-wordmark { font-size: 17px; gap: 8px; }
+  .welcome-header .brand-name { font-size: 18px; letter-spacing: -.8px; }
+  .welcome-header .edition-label { display: none; }
+  body.is-editing .app-nav,body.has-dialog .app-nav { visibility: hidden; pointer-events: none; }
+  .app-dialog { position: fixed; top: var(--visible-top,0px); bottom: auto; margin-block: 8px; max-height: calc(var(--visible-height,100dvh) - 16px); }
+  .search-dialog .search-form { position: sticky; top: 0; z-index: 2; padding-block: 8px; background: #141c23; }
+  .price-lab { padding: 16px 12px; }
+  .price-lab .price-card { padding: 16px 12px; }
+}
 .manual-share-url { display: block; overflow-wrap: anywhere; margin-top: 8px; color: #b7e6cd; text-decoration: underline; text-underline-offset: 3px; }
 .welcome-header .brand { min-height: 44px; }
 @media (max-width: 1024px) {

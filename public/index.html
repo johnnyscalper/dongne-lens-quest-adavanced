@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080a0f">
   <meta name="color-scheme" content="dark">
   <meta name="description" content="동네렌즈 퀘스트. 3D 동네 탐험, 가격 착시 탐정, 주소 블라인드 선택실험으로 거래 숫자와 나의 기준을 살펴보세요.">
-  <title>동네렌즈 퀘스트 — 다음 집으로 가는, 나만의 궤도</title>
+  <title>동네렌즈 퀘스트</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23080a0f'/%3E%3Ccircle cx='18' cy='18' r='9' stroke='%2399f6d2' stroke-width='3' fill='none'/%3E%3Cpath d='m25 25 7 7M13 20v-5l5-4 5 4v5' fill='none' stroke='%23a798ff' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/journey.css">
@@ -22,7 +22,7 @@
 <body id="top" data-auth="welcome" data-screen="home">
   <a class="skip-link" href="#profile-form">시작 방법으로 바로가기</a>
   <section id="welcome-screen" class="welcome-screen" aria-labelledby="hero-title">
-    <header class="welcome-header"><a class="brand" href="/" aria-label="동네렌즈 퀘스트 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span class="brand-name">동네렌즈</span></a><span class="edition-label">MOBILE EDITION <span>05</span></span><a class="welcome-jump" href="#profile-form">체험 시작 ↗</a></header>
+    <header class="welcome-header"><a class="brand" href="/" aria-label="동네렌즈 퀘스트 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span class="brand-name">동네렌즈 퀘스트</span></a><span class="edition-label">MOBILE EDITION <span>05</span></span><a class="welcome-jump" href="#profile-form">체험 시작 ↗</a></header>
     <div class="welcome-layout">
       <div class="welcome-story">
         <p class="eyebrow"><span class="status-dot"></span> YOUR NEXT CHAPTER</p>
@@ -52,7 +52,7 @@
   <div id="app-shell" class="app-shell" hidden>
     <header class="app-header">
       <div class="app-header-inner">
-        <div class="app-header-leading"><button id="screen-back" class="icon-button" type="button" aria-label="이전 화면으로" hidden><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"></path></svg></button><button type="button" class="app-wordmark" data-route="home" aria-label="동네렌즈 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span>동네렌즈</span></button></div>
+        <div class="app-header-leading"><button id="screen-back" class="icon-button" type="button" aria-label="이전 화면으로" hidden><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"></path></svg></button><button type="button" class="app-wordmark" data-route="home" aria-label="동네렌즈 퀘스트 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span>동네렌즈 퀘스트</span></button></div>
         <strong id="app-header-title" class="app-header-title">홈</strong>
         <button class="icon-button header-search" type="button" data-open-search aria-label="지역 검색"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></button>
       </div>
@@ -199,6 +199,6 @@
   </dialog>
   <dialog id="apartment-dialog" class="app-dialog apartment-dialog" aria-labelledby="apartment-dialog-title"><div class="dialog-handle" aria-hidden="true"></div><div class="dialog-heading"><div><p class="section-kicker">A PLACE IN DETAIL</p><h2 id="apartment-dialog-title">단지 살펴보기</h2></div><button type="button" class="icon-button dialog-close" data-close-dialog="apartment-dialog" aria-label="단지 상세 닫기"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div><div id="apartment-detail-content"></div><div class="detail-actions"><button id="detail-save" class="button button-secondary" type="button" aria-pressed="false"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 5.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>관심 단지 담기</span></button><button id="detail-plan" class="button button-primary" type="button">지역 기준 자금계산 <svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-  <noscript><p class="noscript-note">동네렌즈를 실행하려면 브라우저의 JavaScript를 켜주세요.</p></noscript>
+  <noscript><p class="noscript-note">동네렌즈 퀘스트를 실행하려면 브라우저의 JavaScript를 켜주세요.</p></noscript>
 </body>
 </html>

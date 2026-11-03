@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080a0f">
   <meta name="color-scheme" content="dark">
   <meta name="description" content="동네렌즈 퀘스트. 3D 동네 탐험, 가격 착시 탐정, 주소 블라인드 선택실험으로 거래 숫자와 나의 기준을 살펴보세요.">
-  <title>동네렌즈 퀘스트 — 다음 집으로 가는, 나만의 궤도</title>
+  <title>동네렌즈 퀘스트</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23080a0f'/%3E%3Ccircle cx='18' cy='18' r='9' stroke='%2399f6d2' stroke-width='3' fill='none'/%3E%3Cpath d='m25 25 7 7M13 20v-5l5-4 5 4v5' fill='none' stroke='%23a798ff' stroke-width='2'/%3E%3C/svg%3E">
   <style>
 /* styles.css */
@@ -1258,6 +1258,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .apartment-price { font-size: 25px; }
 }
 body.has-dialog { overflow: hidden; }
+/* Submission polish: consistent controls and unobstructed focus targets. */
+html { scroll-padding-block: 90px 110px; }
+:is(button,input,select,textarea) { scroll-margin-block: 90px 110px; }
+.price-lab { margin-block: 24px; }
+.price-lab .price-select,.price-lab .price-copy-text { font-size: 16px; }
+.price-lab .price-actions { gap: 12px; }
+.price-lab .price-actions .lab-action { font-size: 14px; padding: 12px 16px; border-radius: 14px; line-height: 1.5; }
+.price-lab .price-number { line-height: 1.4; }
+.price-lab .price-result { margin-top: 24px; }
+@media(max-width:600px) {
+  .app-header-title { display: none; }
+  .app-wordmark { font-size: 17px; gap: 8px; }
+  .welcome-header .brand-name { font-size: 18px; letter-spacing: -.8px; }
+  .welcome-header .edition-label { display: none; }
+  body.is-editing .app-nav,body.has-dialog .app-nav { visibility: hidden; pointer-events: none; }
+  .app-dialog { position: fixed; top: var(--visible-top,0px); bottom: auto; margin-block: 8px; max-height: calc(var(--visible-height,100dvh) - 16px); }
+  .search-dialog .search-form { position: sticky; top: 0; z-index: 2; padding-block: 8px; background: #141c23; }
+  .price-lab { padding: 16px 12px; }
+  .price-lab .price-card { padding: 16px 12px; }
+}
 .manual-share-url { display: block; overflow-wrap: anywhere; margin-top: 8px; color: #b7e6cd; text-decoration: underline; text-underline-offset: 3px; }
 .welcome-header .brand { min-height: 44px; }
 @media (max-width: 1024px) {
@@ -1276,7 +1296,7 @@ body.has-dialog { overflow: hidden; }
 <body id="top" data-auth="welcome" data-screen="home">
   <a class="skip-link" href="#profile-form">시작 방법으로 바로가기</a>
   <section id="welcome-screen" class="welcome-screen" aria-labelledby="hero-title">
-    <header class="welcome-header"><a class="brand" href="#top" aria-label="동네렌즈 퀘스트 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span class="brand-name">동네렌즈</span></a><span class="edition-label">MOBILE EDITION <span>05</span></span><a class="welcome-jump" href="#profile-form">체험 시작 ↗</a></header>
+    <header class="welcome-header"><a class="brand" href="#top" aria-label="동네렌즈 퀘스트 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span class="brand-name">동네렌즈 퀘스트</span></a><span class="edition-label">MOBILE EDITION <span>05</span></span><a class="welcome-jump" href="#profile-form">체험 시작 ↗</a></header>
     <div class="welcome-layout">
       <div class="welcome-story">
         <p class="eyebrow"><span class="status-dot"></span> YOUR NEXT CHAPTER</p>
@@ -1306,7 +1326,7 @@ body.has-dialog { overflow: hidden; }
   <div id="app-shell" class="app-shell" hidden>
     <header class="app-header">
       <div class="app-header-inner">
-        <div class="app-header-leading"><button id="screen-back" class="icon-button" type="button" aria-label="이전 화면으로" hidden><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"></path></svg></button><button type="button" class="app-wordmark" data-route="home" aria-label="동네렌즈 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span>동네렌즈</span></button></div>
+        <div class="app-header-leading"><button id="screen-back" class="icon-button" type="button" aria-label="이전 화면으로" hidden><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"></path></svg></button><button type="button" class="app-wordmark" data-route="home" aria-label="동네렌즈 퀘스트 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"></circle><path d="m21 21 7 7M9 16v-5l5-4 5 4v5"></path></svg></span><span>동네렌즈 퀘스트</span></button></div>
         <strong id="app-header-title" class="app-header-title">홈</strong>
         <button class="icon-button header-search" type="button" data-open-search aria-label="지역 검색"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></button>
       </div>
@@ -1453,7 +1473,7 @@ body.has-dialog { overflow: hidden; }
   </dialog>
   <dialog id="apartment-dialog" class="app-dialog apartment-dialog" aria-labelledby="apartment-dialog-title"><div class="dialog-handle" aria-hidden="true"></div><div class="dialog-heading"><div><p class="section-kicker">A PLACE IN DETAIL</p><h2 id="apartment-dialog-title">단지 살펴보기</h2></div><button type="button" class="icon-button dialog-close" data-close-dialog="apartment-dialog" aria-label="단지 상세 닫기"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div><div id="apartment-detail-content"></div><div class="detail-actions"><button id="detail-save" class="button button-secondary" type="button" aria-pressed="false"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 5.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>관심 단지 담기</span></button><button id="detail-plan" class="button button-primary" type="button">지역 기준 자금계산 <svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg></button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-  <noscript><p class="noscript-note">동네렌즈를 실행하려면 브라우저의 JavaScript를 켜주세요.</p></noscript>
+  <noscript><p class="noscript-note">동네렌즈 퀘스트를 실행하려면 브라우저의 JavaScript를 켜주세요.</p></noscript>
 <script>
 globalThis.DONGNE_RUNTIME = 'local';
 globalThis.DONGNE_REGIONS = [{"code":"11110","name":"서울특별시 종로구","aliases":["서울 종로","종로구","종로","혜화","평창","사직"],"neighborhoods":["혜화동","평창동","사직동"]},{"code":"11140","name":"서울특별시 중구","aliases":["서울 중구","중구","신당","황학","중림"],"neighborhoods":["신당동","황학동","중림동"]},{"code":"11170","name":"서울특별시 용산구","aliases":["서울 용산","용산구","용산","이촌","한남","이태원"],"neighborhoods":["이촌동","한남동","이태원동"]},{"code":"11200","name":"서울특별시 성동구","aliases":["서울 성동","성동구","성동","성수","성수동","왕십리","금호","옥수"],"neighborhoods":["성수동1가","성수동2가","하왕십리동","금호동4가","옥수동"]},{"code":"11215","name":"서울특별시 광진구","aliases":["서울 광진","광진구","광진","자양","광장","구의","건대"],"neighborhoods":["자양동","광장동","구의동"]},{"code":"11230","name":"서울특별시 동대문구","aliases":["동대문구","동대문","전농","답십리","장안","이문"],"neighborhoods":["전농동","답십리동","장안동","이문동"]},{"code":"11260","name":"서울특별시 중랑구","aliases":["중랑구","중랑","면목","상봉","신내"],"neighborhoods":["면목동","상봉동","신내동"]},{"code":"11290","name":"서울특별시 성북구","aliases":["성북구","성북","길음","돈암","장위"],"neighborhoods":["길음동","돈암동","장위동"]},{"code":"11305","name":"서울특별시 강북구","aliases":["강북구","강북","미아","수유","번동"],"neighborhoods":["미아동","수유동","번동"]},{"code":"11320","name":"서울특별시 도봉구","aliases":["도봉구","도봉","창동","쌍문"],"neighborhoods":["창동","쌍문동","도봉동"]},{"code":"11350","name":"서울특별시 노원구","aliases":["노원구","노원","상계","중계","하계","공릉"],"neighborhoods":["상계동","중계동","하계동","공릉동"]},{"code":"11380","name":"서울특별시 은평구","aliases":["은평구","은평","불광","응암","진관"],"neighborhoods":["불광동","응암동","진관동"]},{"code":"11410","name":"서울특별시 서대문구","aliases":["서대문구","서대문","북아현","남가좌","홍제"],"neighborhoods":["북아현동","남가좌동","홍제동"]},{"code":"11440","name":"서울특별시 마포구","aliases":["마포구","마포","아현","공덕","상암","합정"],"neighborhoods":["아현동","공덕동","상암동","합정동"]},{"code":"11470","name":"서울특별시 양천구","aliases":["양천구","양천","목동","신정","신월"],"neighborhoods":["목동","신정동","신월동"]},{"code":"11500","name":"서울특별시 강서구","aliases":["강서구","강서","마곡","등촌","화곡","가양"],"neighborhoods":["마곡동","등촌동","화곡동","가양동"]},{"code":"11530","name":"서울특별시 구로구","aliases":["구로구","구로","신도림","고척","개봉"],"neighborhoods":["구로동","신도림동","고척동","개봉동"]},{"code":"11545","name":"서울특별시 금천구","aliases":["금천구","금천","독산","시흥동","가산"],"neighborhoods":["독산동","시흥동","가산동"]},{"code":"11560","name":"서울특별시 영등포구","aliases":["영등포구","영등포","여의도","당산","문래"],"neighborhoods":["여의도동","당산동5가","문래동3가"]},{"code":"11590","name":"서울특별시 동작구","aliases":["동작구","동작","흑석","상도","사당"],"neighborhoods":["흑석동","상도동","사당동"]},{"code":"11620","name":"서울특별시 관악구","aliases":["관악구","관악","봉천","신림","남현"],"neighborhoods":["봉천동","신림동","남현동"]},{"code":"11650","name":"서울특별시 서초구","aliases":["서초구","서초","반포","잠원","방배","양재"],"neighborhoods":["서초동","반포동","잠원동","방배동","양재동"]},{"code":"11680","name":"서울특별시 강남구","aliases":["서울 강남","강남구","강남","청담","청담동","압구정","삼성동","역삼","대치","도곡","개포","일원","수서"],"neighborhoods":["청담동","압구정동","삼성동","역삼동","대치동","도곡동","개포동","일원동","수서동"]},{"code":"11710","name":"서울특별시 송파구","aliases":["송파구","송파","잠실","가락","문정","방이","위례"],"neighborhoods":["잠실동","가락동","문정동","방이동","장지동"]},{"code":"11740","name":"서울특별시 강동구","aliases":["강동구","강동","고덕","상일","명일","둔촌","암사","천호"],"neighborhoods":["고덕동","상일동","명일동","둔촌동","암사동","천호동"]}];
@@ -3207,7 +3227,7 @@ globalThis.DongnePriceChoice = {
     if (value >= 100000000) return `${(value / 100000000).toLocaleString('ko-KR', { maximumFractionDigits: 2 })}억`;
     return `${(value / 10000).toLocaleString('ko-KR', { maximumFractionDigits: 1 })}만원`;
   };
-  const routeLabels = Object.freeze({ home: '동네렌즈', market: '동네 탐색', labs: '두 가지 실험', plan: '내 자금 계획', saved: '관심 단지', profile: '마이 렌즈' });
+  const routeLabels = Object.freeze({ home: '동네렌즈 퀘스트', market: '동네 탐색', labs: '두 가지 실험', plan: '내 자금 계획', saved: '관심 단지', profile: '마이 렌즈' });
   const state = {
     initialized: false, entered: false, guest: true, nickname: '', route: 'home', index: 0,
     dialog: null, dialogFocus: null, closingNative: false, regions: [], saved: [], recent: [],
@@ -3714,6 +3734,20 @@ globalThis.DongnePriceChoice = {
     screenEvent('welcome');
   }
 
+  // Mobile sheets follow the visible viewport, including an open software keyboard.
+  function syncVisibleViewport() {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+    document.documentElement.style.setProperty('--visible-height', `${viewport.height}px`);
+    document.documentElement.style.setProperty('--visible-top', `${viewport.offsetTop}px`);
+    const editing = document.activeElement?.matches?.('input:not([type="range"]), textarea, select');
+    document.body.classList.toggle('is-editing', Boolean(editing));
+  }
+  window.visualViewport?.addEventListener('resize', syncVisibleViewport);
+  window.visualViewport?.addEventListener('scroll', syncVisibleViewport);
+  document.addEventListener('focusin', syncVisibleViewport);
+  document.addEventListener('focusout', () => setTimeout(syncVisibleViewport, 0));
+  syncVisibleViewport();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 })();
@@ -4345,7 +4379,7 @@ globalThis.DongnePriceChoice = {
   function downloadReport() {
     if (!state.analysis || !state.market) return;
     const report = {
-      app: '동네렌즈 퀘스트 (Adavanced)', version: state.config?.app_version || '0.5.0', runtime: LOCAL_RUNTIME ? 'local' : 'server', generated_at: new Date().toISOString(), mode: state.market.mode,
+      app: '동네렌즈 퀘스트', version: state.config?.app_version || '0.5.0', runtime: LOCAL_RUNTIME ? 'local' : 'server', generated_at: new Date().toISOString(), mode: state.market.mode,
       disclaimer: state.market.mode === 'demo' ? '모든 거래는 가상 예시입니다. 실제 시세 또는 투자 판단 자료가 아닙니다.' : '신고된 과거 거래자료 기반의 조건 비교이며, 투자 수익·대출 승인·현재 매물 호가를 보장하지 않습니다.',
       region: state.region, period: state.market.period, source: state.market.source, fetched_at: state.market.fetched_at, coverage: state.market.coverage,
       filters: { area_band: $('area-select').value, neighborhood: $('neighborhood-select').value }, assumptions: state.assumptions, analysis: state.analysis

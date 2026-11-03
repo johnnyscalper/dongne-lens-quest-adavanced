@@ -622,7 +622,7 @@
   function downloadReport() {
     if (!state.analysis || !state.market) return;
     const report = {
-      app: '동네렌즈 퀘스트 (Adavanced)', version: state.config?.app_version || '0.5.0', runtime: LOCAL_RUNTIME ? 'local' : 'server', generated_at: new Date().toISOString(), mode: state.market.mode,
+      app: '동네렌즈 퀘스트', version: state.config?.app_version || '0.5.0', runtime: LOCAL_RUNTIME ? 'local' : 'server', generated_at: new Date().toISOString(), mode: state.market.mode,
       disclaimer: state.market.mode === 'demo' ? '모든 거래는 가상 예시입니다. 실제 시세 또는 투자 판단 자료가 아닙니다.' : '신고된 과거 거래자료 기반의 조건 비교이며, 투자 수익·대출 승인·현재 매물 호가를 보장하지 않습니다.',
       region: state.region, period: state.market.period, source: state.market.source, fetched_at: state.market.fetched_at, coverage: state.market.coverage,
       filters: { area_band: $('area-select').value, neighborhood: $('neighborhood-select').value }, assumptions: state.assumptions, analysis: state.analysis
