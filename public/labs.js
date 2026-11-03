@@ -1,3 +1,26 @@
+/* Pure scenario model: never writes to a candidate or to market records. */
+globalThis.DongnePriceChoice = {
+  price(base, discount) {
+    if (!Number.isSafeInteger(base) || base <= 0 || !Number.isInteger(discount) || discount < 0 || discount > 30) return null;
+    const assumed = Math.round(base * (100 - discount) / 100);
+    return { base, assumed, discount, difference: base - assumed };
+  },
+  create() {
+    return {
+      b: null, discount: 0, decision: null,
+      reset(b = null) { this.b = b; this.discount = 0; this.decision = null; },
+      adjust(value) {
+        if (!Number.isInteger(value) || value < 0 || value > 30) return false;
+        this.discount = value; this.decision = null; return true;
+      },
+      confirm(choice, base) {
+        const quote = globalThis.DongnePriceChoice.price(base, this.discount);
+        if (!this.b || !quote || !['a', 'b', 'unsure'].includes(choice)) return false;
+        this.decision = Object.freeze({ choice, b: this.b, ...quote }); return true;
+      }
+    };
+  }
+};
 /* Two small decision experiments. All selections stay in this page's memory. */
 (() => {
   'use strict';
@@ -15,6 +38,8 @@
   }
 
   const state = { sequence: 0, controller: null, exampleController: null, exampleSequence: 0, context: null, result: null, example: null, useExample: false, adjusted: false, loading: false, error: '', exampleError: '', exampleLoading: false, selected: null, firstChoice: null, stage: 'blind' };
+  const scenario = globalThis.DongnePriceChoice.create();
+  let priceStage = 'invite';
   const finite = (value) => typeof value === 'number' && Number.isFinite(value);
   const num = (value, digits = 1) => finite(value) ? value.toLocaleString('ko-KR', { maximumFractionDigits: digits }) : '—';
   const money = (value) => !finite(value) ? '자료 부족' : value >= 100000000 ? `${num(value / 100000000, 2)}억` : `${num(value / 10000, 0)}만원`;
@@ -187,6 +212,7 @@
   }
 
   function renderBlind() {
+    announce(blindRoot, '');
     blindHost.className = 'lab-card blind-lab-card'; blindRoot.replaceChildren();
     append(blindRoot, heading('02', '주소 블라인드 선택실험', '동네 이름을 잠깐 가리면, 어떤 집이 눈에 들어올까요?'));
     const toolbar = make('div', 'lab-toolbar');
@@ -250,6 +276,7 @@
       }
       blindRoot.append(reflection);
     }
+    if (state.stage === 'done') renderPriceChoice(data.candidates);
     const details = make('details', 'lab-details');
     append(details, make('summary', '', `어떤 후보를 보여주나요? · 조건을 충족한 구간 ${num(data.eligible_cohorts, 0)}개`));
     const notes = make('div', 'lab-details-body');
@@ -259,6 +286,135 @@
     blindRoot.append(make('p', 'lab-footnote', '현재 매물·투자 추천·성향 진단이 아닙니다. 선택 기록은 이 페이지 안에서만 유지됩니다.'));
   }
 
+  function renderPriceChoice(candidates) {
+    const panel = make('section', 'price-lab');
+    panel.setAttribute('aria-label', '내 선택의 가격');
+    append(panel, make('span', 'lab-eyebrow', 'PRICE PLAY · 선택의 다음 장'), make('h4', '', '내 선택의 가격'));
+    blindRoot.append(panel);
+    const refresh = (selector = '.price-title') => { renderBlind(); focusAfterRender(blindRoot, selector); };
+    if (priceStage !== 'active') {
+      panel.append(make('p', '', priceStage === 'skip' ? '가격 실험은 건너뛰었어요. 원할 때 이어갈 수 있습니다.' : '주소를 확인한 내 선택, 가격 조건만 달라져도 같을까요?'));
+      append(panel, button('가격이 달라지면 내 선택도 바뀔까?', 'lab-action price-start', () => { priceStage = 'active'; refresh(); }));
+      if (priceStage !== 'skip') panel.append(button('이번에는 건너뛰기', 'lab-text-button', () => { priceStage = 'skip'; refresh('.price-start'); }));
+      return;
+    }
+    const title = make('p', 'price-title', '최종 선택은 A, 다시 비교할 집은 B');
+    title.tabIndex = -1; panel.append(title);
+    append(panel, badge(sourceText()), make('p', 'lab-footnote', '가격만 바꾸는 가정 실험입니다. 실제 적정가·투자 추천·심리 진단·정확한 선택 전환점이 아닙니다. 원본 거래·관심집·자금계획에는 반영하지 않습니다.'));
+    const a = candidates.find(item => item.id === state.selected);
+    if (!a || !globalThis.DongnePriceChoice.price(a.sale_krw, 0)) {
+      panel.append(statusBox('A의 기준 가격이 유효하지 않아 가격 실험을 진행할 수 없습니다.')); return;
+    }
+    const others = candidates.filter(item => item.id !== a.id);
+    const label = make('label', 'price-label', '비교할 후보 B');
+    label.htmlFor = 'price-candidate';
+    const select = make('select', 'price-select'); select.id = 'price-candidate';
+    const placeholder = make('option', '', '다른 후보를 골라주세요'); placeholder.value = ''; select.append(placeholder);
+    others.forEach(item => {
+      const option = make('option', '', `${item.name} · ${num(item.area_m2)}㎡`);
+      option.value = item.id; select.append(option);
+    });
+    select.value = scenario.b || '';
+    select.addEventListener('change', () => { scenario.reset(select.value || null); refresh('#price-candidate'); });
+    append(panel, label, select);
+    if (!others.length) { panel.append(statusBox('비교할 다른 후보가 부족합니다. 조회 조건을 넓혀주세요.')); return; }
+    const b = others.find(item => item.id === scenario.b);
+    if (!b) { panel.append(statusBox('B를 고르면 0~30% 가격 시나리오를 시작합니다.')); return; }
+    if (!globalThis.DongnePriceChoice.price(b.sale_krw, 0)) { panel.append(statusBox('B의 기준 가격이 유효하지 않습니다. 다른 후보를 골라주세요.')); return; }
+    const exact = value => `${value.toLocaleString('ko-KR')}원`;
+    const grid = make('div', 'price-cards');
+    let priceNode, differenceNode, discountNode;
+    const cards = [];
+    for (const [letter, item] of [['A', a], ['B', b]]) {
+      const card = make('article', 'price-card'); cards.push(card);
+      const mark = make('span', 'price-mark', letter === 'A' ? 'A · 주소 공개 후 선택' : 'B · 가격을 바꿔볼 후보');
+      append(card, mark, make('h5', '', item.name), make('p', 'price-location', item.neighborhood));
+      const facts = make('dl', 'price-facts');
+      const fact = (key, value, cls = '') => {
+        const dd = make('dd', cls, value); append(facts, append(make('div'), make('dt', '', key), dd)); return dd;
+      };
+      fact('원래 기준 가격 · 매매 중앙값', exact(item.sale_krw));
+      if (letter === 'B') {
+        priceNode = fact('조절한 가정 가격 · 실제 가격 아님', '', 'price-number');
+        discountNode = fact('가정 할인율', '');
+        differenceNode = fact('기준 대비 차액', '');
+      }
+      fact('기존 면적 중앙값 / 매매 표본', `${num(item.area_m2)}㎡ / ${num(item.sale_count, 0)}건`);
+      fact('데이터 출처', `${sourceText()} · ${state.context.market.source?.label || '거래 집계'}`);
+      fact('거래 기간', `${item.first_date} – ${item.last_date}`);
+      append(card, facts, make('p', 'price-selection', '아직 가격 선택을 확정하지 않았어요')); grid.append(card);
+    }
+    panel.append(grid);
+    const controls = make('div', 'price-controls');
+    const rangeLabel = make('label', 'price-label', 'B의 가정 할인율'); rangeLabel.htmlFor = 'price-discount';
+    const output = make('output', 'price-discount-value'); output.htmlFor = 'price-discount';
+    const range = make('input', 'price-range'); range.type = 'range'; range.id = 'price-discount'; range.min = '0'; range.max = '30'; range.step = '1';
+    const minus = button('−', 'price-step', () => change(scenario.discount - 1)); minus.setAttribute('aria-label', '할인율 1% 줄이기');
+    const plus = button('+', 'price-step', () => change(scenario.discount + 1)); plus.setAttribute('aria-label', '할인율 1% 늘리기');
+    const row = append(make('div', 'price-slider-row'), minus, range, plus);
+    append(controls, rangeLabel, output, row, make('p', 'lab-footnote', '0% 그대로 ↔ 30% 낮게 · 1%씩 조절 / 버튼을 눌러야 선택이 확정됩니다.'));
+    panel.append(controls);
+    const actions = make('div', 'price-actions');
+    const result = make('div', 'price-result'); result.tabIndex = -1;
+    function renderResult() {
+      result.replaceChildren();
+      const decision = scenario.decision;
+      cards.forEach((card, index) => {
+        const chosen = decision?.choice === (index === 0 ? 'a' : 'b');
+        card.classList.toggle('is-selected', chosen);
+        card.querySelector('.price-selection').textContent = chosen ? '✓ 가정 가격 적용 후 선택 확정' : decision ? '선택하지 않음' : '아직 가격 선택을 확정하지 않았어요';
+      });
+      if (!decision) { result.append(make('p', '', '가격은 가정일 뿐, 선택은 아직 확정되지 않았어요.')); return; }
+      const first = candidates.find(item => item.id === state.firstChoice);
+      const sentence = `B의 가정 가격을 기준보다 ${decision.discount}% 낮춘 시나리오에서 ${decision.choice === 'b' ? 'B를 선택했습니다.' : decision.choice === 'a' ? 'A를 유지했습니다.' : '판단이 어렵다고 답했습니다.'}`;
+      append(result, make('span', 'lab-eyebrow', 'MY CHOICE · 세 번의 기록'), make('h5', '', '가격 조건을 바꾼 뒤의 내 선택'));
+      const trail = make('ol', 'price-trail');
+      [['주소 공개 전', first?.name], ['주소 공개 후', `A · ${a.name}`], ['가정 가격 적용 후', decision.choice === 'unsure' ? '판단 어려움' : decision.choice === 'a' ? `A · ${a.name}` : `B · ${b.name}`]].forEach(([step, value]) => trail.append(append(make('li'), make('span', '', step), make('strong', '', value))));
+      result.append(trail);
+      const summary = make('textarea', 'price-copy-text');
+      summary.readOnly = true; summary.rows = 7; summary.setAttribute('aria-label', '복사할 결과 문구');
+      summary.value = `${sentence}\n주소 공개 전: ${first?.name}\n주소 공개 후: A · ${a.name}\nB: ${b.name}\n기준 ${exact(decision.base)} → 가정 ${exact(decision.assumed)} (차액 ${exact(decision.difference)})\n${sourceText()} · 가격 가정 선택 실험이며 실제 적정가·투자 추천·심리 진단·정확한 선택 전환점이 아닙니다.`;
+      const feedback = make('p', 'price-copy-feedback'); feedback.setAttribute('role', 'status');
+      append(result, make('p', '', sentence), summary,
+        button('결과 문구 복사', 'lab-action lab-action-secondary', async () => {
+          try {
+            if (!navigator.clipboard?.writeText) throw new Error('unsupported');
+            await navigator.clipboard.writeText(summary.value);
+            feedback.textContent = '결과 문구를 복사했습니다.';
+          } catch {
+            summary.focus(); summary.select();
+            feedback.textContent = '자동 복사를 사용할 수 없습니다. 위 텍스트를 길게 눌러 선택하거나 복사해 주세요.';
+          }
+        }), feedback,
+        button('다시 해보기', 'lab-text-button', () => { scenario.reset(); refresh('#price-candidate'); }));
+    }
+    function change(value) {
+      if (!scenario.adjust(value)) return;
+      update(); renderResult();
+      announce(blindRoot, '가격 가정이 바뀌었습니다. 선택을 다시 확정해 주세요.');
+    }
+    function update() {
+      const quote = globalThis.DongnePriceChoice.price(b.sale_krw, scenario.discount);
+      range.value = String(scenario.discount); range.setAttribute('aria-valuetext', `${scenario.discount}% 할인, 가정 가격 ${exact(quote.assumed)}`);
+      output.textContent = `${scenario.discount}%`;
+      // Update the exact number synchronously; animate only its appearance, never its value.
+      priceNode.textContent = exact(quote.assumed);
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && priceNode.animate) {
+        priceNode.getAnimations().forEach(animation => animation.cancel());
+        priceNode.animate([{ opacity: .55, transform: 'translateY(2px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 140 });
+      }
+      discountNode.textContent = `${scenario.discount}% 낮춤`; differenceNode.textContent = `${exact(quote.difference)} 낮음`;
+      minus.disabled = scenario.discount === 0; plus.disabled = scenario.discount === 30;
+    }
+    range.addEventListener('input', () => change(Number(range.value)));
+    for (const [choice, text] of [['b', '이 가격이면 B 선택'], ['a', 'A 유지'], ['unsure', '판단 어려움']]) {
+      actions.append(button(text, 'lab-action', () => {
+        if (scenario.confirm(choice, b.sale_krw)) { renderResult(); result.focus({ preventScroll: true }); announce(blindRoot, '가격 시나리오 선택을 확정했습니다. 아래 결과를 확인하세요.'); }
+      }));
+    }
+    append(panel, actions, result); update(); renderResult();
+  }
+
   function choose(id) {
     if (state.stage === 'blind') { state.firstChoice = id; state.stage = 'reveal'; }
     else state.stage = 'done';
@@ -266,7 +422,7 @@
     renderBlind(); focusAfterRender(blindRoot, '.blind-reflection');
     announce(blindRoot, '집의 이름과 동네를 공개했습니다. 선택을 돌아보세요.');
   }
-  function resetChoice() { state.selected = null; state.firstChoice = null; state.stage = 'blind'; }
+  function resetChoice() { state.selected = null; state.firstChoice = null; state.stage = 'blind'; scenario.reset(); priceStage = 'invite'; }
   function clear() {
     ++state.sequence; state.controller?.abort();
     ++state.exampleSequence; state.exampleController?.abort();
